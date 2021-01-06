@@ -6,8 +6,33 @@ router.get("/",async(req,res)=>{
     return res.send(car);
 });
 
+//get car by its registration number
+router.get("/:registrationnumber",async(req,res)=>{
+    try
+     { 
+         let car=await Cars.find({registrationnumber: req.params.registrationnumber});
+ 
+         if(car) 
+         {
+             return res.status(400).send("Car is not found in database");
+         }
+         else
+         {
+            return res.send(car)
+                 
+         }
+ 
+    }
+    catch(err)
+    {
+        return res.status(400).send("INVALID entry");
+    }
+ });
+
+//register a car
 router.post("/",async(req,res)=>{
     let cars=new Cars();
+
     cars.carname=req.body.carname;
     cars.carcolour=req.body.carcolour;
     cars.carmakername=req.body.carmakername;
