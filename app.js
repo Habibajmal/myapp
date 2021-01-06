@@ -3,7 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+var cors = require('cors');
 var mongoose = require('mongoose');
 var config=require('config');
 var indexRouter = require('./routes/index');
@@ -21,6 +21,22 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors());
+var cors=require("cors");
+const corsOptions= {
+  allowHeaders:[
+    "Origin",
+    "X-Requested-Width",
+    "Content-Type",
+    "Accept",
+    "X-Acess-Token",
+    "Authorization",
+  ],
+  crendentials:true,
+  methods:"GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
+  origin:"http://localhost:3000",
+  preflightContinue:false,
+};
 
 app.use('/', indexRouter);
 app.use('/api/user', userRouter);

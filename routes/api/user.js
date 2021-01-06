@@ -11,36 +11,13 @@ router.get("/",async(req,res)=>{
     let user=await Users.find();
     return res.send(user);
 });
-//get user by role
-router.get("/:role",async(req,res)=>{
-   try
-    { 
-        let user=await Users.find({role: req.params.role});
-
-        if(user) 
-        {
-            return res.status(400).send("Role is not found in database");
-        }
-        else
-        {
-           return res.send(user)
-                
-        }
-
-   }
-   catch(err)
-   {
-       return res.status(400).send("INVALID entry");
-   }
-});
-//get users by role and then Id
 
 
-router.get('/:role/:idcardnumber' ,async (req,res)=>
+router.get('/:idcardnumber' ,async (req,res)=>
 {
     try{
-            let user= await Users.find({$and:[{role:req.params.role},{_iidcardnumber:req.params.idcardnumber}]})
-            if(user)
+            let user= await Users.find({idcardnumber:req.body.idcardnumber})
+            if(!user)
             {
                 return res.status(400).send("User is not present");
             }    
@@ -62,10 +39,8 @@ router.post("/register",async(req,res)=>{
     let user = await Users.find({$or:[{email:req.body.email},{idcardnumber:req.body.idcardnumber}]});
     if (user) return res.status(400).send("User with given Email or id cardnumber already exist");
 
-        user.firstname=req.body.firstname;
-        user.lastname=req.body.lastname;
+        user.name=req.body.name;
         user.fathername=req.body.fathername;
-        user.role=req.body.role;
         user.idcardnumber=req.body.idcardnumber;
         user.phonenumber=req.body.phonenumber;
         user.password=req.body.password;
