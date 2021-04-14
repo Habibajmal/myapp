@@ -1,3 +1,4 @@
 {
-    "db":"mongodb+srv://habib:habib333@cluster0.h6sbx.mongodb.net/challan?retryWrites=true&w=majority"
+    "db":"mongodb+srv://habib:habib333@cluster0.h6sbx.mongodb.net/challan?retryWrites=true&w=majority",
+    "jwtPrivateKey":"someprivatekey"
 }

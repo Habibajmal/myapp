@@ -1,4 +1,3 @@
-
 var mongoose=require("mongoose");
 const router = require("../routes/api/user");
 const Joi = require('joi');
@@ -7,10 +6,6 @@ var userSchema=mongoose.Schema({
     name: String,
     fathername: String,
     email:String,
-    role: {
-      type: String,
-      default: "warden",
-    },
     idcardnumber:Number,
     phonenumber:Number,
     password:String,
@@ -25,7 +20,7 @@ var Users=mongoose.model("Users",userSchema);
 function validateUsers(data)
 {
     const schema=Joi.object({
-       name: Joi.string().min(3).max(30).required(),
+       name: Joi.string().max(30).required(),
        fathername: Joi.string().min(3).max(30).required(),
        email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).required(),
         password: Joi.string().min(3).max(10).required(),

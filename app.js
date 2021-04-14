@@ -8,8 +8,7 @@ var mongoose = require('mongoose');
 var config=require('config');
 var indexRouter = require('./routes/index');
 var userRouter = require('./routes/api/user');
-var carsRouter = require('./routes/api/cars');
-
+var adminRouter = require('./routes/api/admins');
 var app = express();
 
 // view engine setup
@@ -40,7 +39,7 @@ const corsOptions= {
 
 app.use('/', indexRouter);
 app.use('/api/user', userRouter);
-app.use('/api/cars', carsRouter);
+app.use('/api/admin',adminRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
