@@ -14,7 +14,6 @@ router.get("/",async(req,res)=>{
 });
 router.get("/:idcardnumber",async(req,res)=>{
     let user=await Users.findOne({idcardnumber:req.params.idcardnumber});
-    console.log(req.params.idcardnumber);
     if(user)
     {
     return res.send(user);

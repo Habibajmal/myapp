@@ -10,7 +10,7 @@ var adminSchema=mongoose.Schema({
       type: String,
       default: "admin",
     },
-    wardenid:Number,
+    adminid:Number,
     password:String,
 });
 adminSchema.methods.generateHashedPassword = async function () {

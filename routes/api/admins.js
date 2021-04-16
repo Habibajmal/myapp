@@ -34,7 +34,7 @@ router.get("/:adminid",async(req,res)=>{
    }
 });
 // register admin
-router.post('/register',async function(req, res) {
+router.post("/register",async function(req, res) {
   let admin=await Admins.findOne({adminid:req.body.adminid});
   if (admin){
     return res.status("400").send("User with given email alreday exists")
@@ -86,8 +86,8 @@ router.post("/login", async (req, res) => {
       admin.fathername=req.body.fathername;
       admin.password=req.body.password;
       admin.adminid=req.body.adminid;
-      users.password= await bcrypt.hash(req.body.password,10)
-      await users.save()
+      admin.password= await bcrypt.hash(req.body.password,10)
+      await admin.save()
       let token=jwt.sign({_id:admin._id,name:admin.name,fathername:admin.fathername },
           config.get("jwtPrivateKey"));
           return  res.send(token)
